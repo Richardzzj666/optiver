@@ -12,7 +12,7 @@ import pandas as pd
 
 class MockApi:
     def __init__(self):
-        '''
+        """
         YOU MUST UPDATE THE FIRST THREE LINES of this method.
         They've been intentionally left in an invalid state.
 
@@ -21,7 +21,7 @@ class MockApi:
             group_id_column: the column that identifies which groups of rows the API should serve.
                 A call to iter_test serves all rows of all dataframes with the current group ID value.
             export_group_id_column: if true, the dataframes iter_test serves will include the group_id_column values.
-        '''
+        """
         self.input_paths: Sequence[str] =
         self.group_id_column: str =
         self.export_group_id_column: bool =
@@ -32,10 +32,10 @@ class MockApi:
         self.predictions = []
 
     def iter_test(self) -> Tuple[pd.DataFrame]:
-        '''
+        """
         Loads all of the dataframes specified in self.input_paths,
         then yields all rows in those dataframes that equal the current self.group_id_column value.
-        '''
+        """
         if self._status != 'initialized':
 
             raise Exception('WARNING: the real API can only iterate over `iter_test()` once.')
@@ -68,9 +68,9 @@ class MockApi:
         self._status = 'finished'
 
     def predict(self, user_predictions: pd.DataFrame):
-        '''
+        """
         Accepts and stores the user's predictions and unlocks iter_test once that is done
-        '''
+        """
         if self._status == 'finished':
             raise Exception('You have already made predictions for the full test set.')
         if self._status != 'prediction_needed':
